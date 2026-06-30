@@ -54,6 +54,32 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
 .placeholder-box .ph-label{font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
 .placeholder-box p{font-size:13px;color:var(--muted);line-height:1.8;}
 
+/* ABOUT CONTENT */
+.about-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:32px;margin-top:24px;text-align:left;}
+.about-card h3{font-size:18px;font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.about-card .lead-line{font-size:14px;color:var(--text);margin-bottom:16px;line-height:1.8;}
+.vibe-list{list-style:none;padding:0;margin:14px 0;}
+.vibe-list li{font-size:13px;color:var(--muted);padding:6px 0;display:flex;align-items:center;gap:8px;}
+.rp-box{background:var(--bg2);border-left:3px solid var(--accent);border-radius:10px;padding:18px 20px;margin:18px 0;}
+.rp-box h4{font-size:15px;font-weight:800;margin-bottom:8px;color:var(--accent2);}
+.rp-tag-list{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;}
+.rp-tag{font-size:12px;background:rgba(168,85,247,0.12);color:var(--accent);padding:5px 12px;border-radius:100px;font-weight:600;}
+.rules-box{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-top:14px;}
+.rules-box h4{font-size:13px;font-weight:800;margin-bottom:10px;color:var(--orange);}
+.rules-box ol{padding-left:18px;}
+.rules-box li{font-size:13px;color:var(--muted);padding:4px 0;line-height:1.6;}
+.discord-cta{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(236,72,153,0.1));border:1px solid var(--border);border-radius:14px;padding:18px 22px;margin-top:22px;flex-wrap:wrap;}
+.discord-cta p{font-size:13px;color:var(--text);font-weight:600;}
+.discord-cta a.btn{text-decoration:none;}
+
+/* DOCUMENTATION GALLERY */
+.doc-gallery-section{padding:56px 20px;background:var(--bg);}
+.doc-gallery-inner{max-width:900px;margin:0 auto;}
+.doc-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-top:28px;}
+.doc-photo-card{aspect-ratio:1;background:var(--card);border:1px dashed var(--border);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);}
+.doc-photo-card .dp-icon{font-size:32px;opacity:0.5;}
+.doc-photo-card .dp-text{font-size:11px;text-align:center;padding:0 10px;}
+
 /* FEATURES */
 .feat-section{padding:64px 20px;}
 .feat-inner{max-width:900px;margin:0 auto;}
@@ -269,7 +295,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
         <circle cx="50" cy="100" r="1.5" fill="#fff" opacity="0.5"/>
       </svg>
     </div>
-    <div class="hero-pill">🌙 Komunitas Discord · Tongkrongan Eclipse</div>
+    <div class="hero-pill">🌙 Tongkrongan Eclipse</div>
     <h1>Welcome to<br><span class="grad">Eclipse Vault</span></h1>
     <p class="hero-sub">Tempat penyimpanan khusus member Tongkrongan Eclipse — simpan video record, foto roleplay, dan momen seru bareng komunitas.</p>
     <div class="hero-cta">
@@ -282,14 +308,65 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
   <div class="about-section">
     <div class="about-inner">
       <p class="eyebrow">Tentang Kami</p>
-      <h2>Apa itu Tongkrongan Eclipse?</h2>
-      <div class="placeholder-box">
-        <div class="ph-label">✏️ Placeholder — Isi nanti</div>
-        <p>Di sini nanti kamu bisa tulis cerita/penjelasan tentang komunitas Discord "Tongkrongan Eclipse" — bisa soal sejarah komunitas, vibe-nya kayak gimana, aktivitas apa aja yang sering dilakuin (roleplay, nongkrong, ngegame bareng, dll), dan kenapa nama "Eclipse" dipilih.</p>
+      <h2>🌑 Tongkrongan Eclipse</h2>
+      <p class="about-text" style="font-size:16px;font-weight:700;color:var(--text)">Tempat Nongkrong & Ngonten Bareng! 🎬</p>
+
+      <div class="about-card">
+        <p class="lead-line">Halo semuanya! <strong>Tongkrongan Eclipse</strong> adalah wadah buat para <strong>konten kreator baru</strong> yang pengen ngonten bareng, ngobrol santai, dan cari teman satu vibe — <strong>tanpa bikin sirkel-sirkelan</strong>. Di sini semua orang setara, semua boleh gabung dan akrab bareng.</p>
+        <ul class="vibe-list">
+          <li>✨ Ngobrol santai</li>
+          <li>✨ Ngonten bareng</li>
+          <li>✨ Cari teman baru yang satu vibe</li>
+          <li>🤝 Tanpa sirkel-sirkelan, semua saling terbuka</li>
+        </ul>
+
+        <p class="lead-line" style="margin-top:14px;font-size:13px;color:var(--muted)">🌑 <strong style="color:var(--text)">Tongkrongan Eclipse</strong> ini adalah teman, bukan saling sirkel — kita semua di sini saling menghormati satu sama lain.</p>
+
+        <div class="rp-box">
+          <h4>🚀 Contoh Event: RUDAL Roleplay</h4>
+          <p style="font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">📌 Salah satu kegiatan seru di Tongkrongan Eclipse</p>
+          <p style="font-size:13px;color:var(--muted);line-height:1.7">Selain ngonten dan ngobrol bareng, kami sesekali ngadain event seru, salah satunya Minecraft Roleplay: <strong style="color:var(--text)">RUDAL Roleplay</strong>. Di sini kalian bisa ikut RP seru dengan tema:</p>
+          <div class="rp-tag-list">
+            <span class="rp-tag">⚔️ Perang aliansi</span>
+            <span class="rp-tag">🏰 Strategi & cerita seru</span>
+            <span class="rp-tag">🎭 Roleplay bareng komunitas</span>
+          </div>
+          <div class="rules-box" style="margin-top:14px">
+            <h4>📌 Syarat Join RUDAL Roleplay</h4>
+            <ol>
+              <li>Diusahakan mic nyala 🎙️</li>
+              <li>Kalau punya channel YouTube, diupload 📺</li>
+              <li>Jangan baper saat RP / di komunitas 😄</li>
+            </ol>
+          </div>
+        </div>
+
+        <p class="lead-line" style="margin-top:18px">Kalau kalian tertarik atau mau info lebih lanjut, langsung aja tanya admin ya! Yuk gabung dan jadi bagian dari keseruan kita! 🚀</p>
+
+        <div class="discord-cta">
+          <p>🔥 Join sekarang juga di Tongkrongan Eclipse!</p>
+          <a href="https://discord.gg/hWNeevXXJ" target="_blank" class="btn btn-p" style="padding:10px 22px;font-size:13px">Gabung Discord →</a>
+        </div>
       </div>
-      <div class="placeholder-box" style="margin-top:16px">
-        <div class="ph-label">✏️ Placeholder — Isi nanti</div>
-        <p>Di sini nanti kamu jelasin web Eclipse Vault ini dibuat buat apa — misalnya sebagai tempat penyimpanan bersama untuk hasil record video, screenshot momen roleplay, foto-foto kegiatan komunitas, dan dokumentasi lain yang berkaitan dengan Tongkrongan Eclipse.</p>
+
+      <div class="placeholder-box" style="margin-top:18px">
+        <div class="ph-label">✏️ Placeholder — Rules komunitas (revisi berikutnya)</div>
+        <p>Bagian ini nanti diisi rules lengkap Tongkrongan Eclipse.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOKUMENTASI FOTO -->
+  <div class="doc-gallery-section">
+    <div class="doc-gallery-inner">
+      <p class="eyebrow" style="text-align:center">Dokumentasi</p>
+      <h2 style="text-align:center;font-size:clamp(20px,3vw,30px);font-weight:900">Momen Tongkrongan Eclipse</h2>
+      <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:8px">Foto-foto kegiatan dan keseruan bareng komunitas dari berbagai game</p>
+      <div class="doc-photo-grid">
+        <div class="doc-photo-card"><div class="dp-icon">📷</div><div class="dp-text">Foto dokumentasi<br>(segera hadir)</div></div>
+        <div class="doc-photo-card"><div class="dp-icon">📷</div><div class="dp-text">Foto dokumentasi<br>(segera hadir)</div></div>
+        <div class="doc-photo-card"><div class="dp-icon">📷</div><div class="dp-text">Foto dokumentasi<br>(segera hadir)</div></div>
+        <div class="doc-photo-card"><div class="dp-icon">📷</div><div class="dp-text">Foto dokumentasi<br>(segera hadir)</div></div>
       </div>
     </div>
   </div>
@@ -381,7 +458,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
       <button class="sb-item" id="sb-profile" onclick="showDash('profile')">👤 &nbsp;Profil</button>
       <div class="sb-title" style="margin-top:14px">Lainnya</div>
       <button class="sb-item" onclick="goTo('members')">👥 &nbsp;Member</button>
-      <button class="sb-item" onclick="goTo('home')">🏠 &nbsp;Beranda</button>
+      <button class="sb-item" onclick="goTo('home')">📖 &nbsp;Tentang Tongkrongan Eclipse</button>
       <button class="sb-item" onclick="logout()" style="color:#fca5a5">🚪 &nbsp;Keluar</button>
     </div>
     <div class="dash-main">
@@ -435,7 +512,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
         </div>
         <div class="crd">
           <h3 style="margin-bottom:10px">🌑 Tentang Eclipse Vault</h3>
-          <p style="font-size:12px;color:var(--muted);line-height:1.8">Eclipse Vault adalah tempat penyimpanan khusus untuk member komunitas Discord <strong style="color:var(--text)">Tongkrongan Eclipse</strong>. Simpan video record, foto roleplay, dan momen seru bareng komunitas di satu tempat.</p>
+          <p style="font-size:12px;color:var(--muted);line-height:1.8">Eclipse Vault adalah tempat penyimpanan khusus untuk member <strong style="color:var(--text)">Tongkrongan Eclipse</strong>. Simpan video record, foto roleplay, dan momen seru bareng komunitas di satu tempat.</p>
+          <button class="btn btn-o" onclick="goTo('home')" style="margin-top:14px;padding:9px 18px;font-size:12px">📖 Baca Selengkapnya Tentang Tongkrongan Eclipse</button>
         </div>
       </div>
     </div>
