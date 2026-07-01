@@ -118,7 +118,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
 .member-search input{width:100%;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 16px 11px 40px;color:var(--text);font-size:13px;outline:none;}
 .member-search input:focus{border-color:var(--accent);}
 .member-search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;color:var(--muted);}
-.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;}
+.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
 .member-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 12px;text-align:center;transition:all .2s;}
 .member-card:hover{border-color:var(--accent);transform:translateY(-2px);}
 .member-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#ec4899);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;margin:0 auto 10px;}
@@ -259,12 +259,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
   <div class="nav-logo"><span class="moon">🌑</span> <span>Eclipse Vault</span></div>
   <div class="nav-links" id="navLinks">
     <button class="nb" onclick="goTo('home')">Beranda</button>
-    <button class="nb" onclick="goTo('members')">Member</button>
+    <button class="nb" onclick="goTo('members')">Akun Saya</button>
     <button class="nb" onclick="goTo('login')">Masuk</button>
     <button class="nb primary" onclick="goTo('register')">Gabung</button>
   </div>
   <div class="nav-user" id="navUser">
-    <button class="nb" onclick="goTo('members')" style="display:block;font-size:12px">Member</button>
+    <button class="nb" onclick="goTo('members')" style="display:block;font-size:12px">Akun Saya</button>
     <button class="nb" onclick="goTo('dashboard')" style="display:block;font-size:12px">Vault</button>
     <div class="nav-avatar" id="navAvatar">E</div>
     <button class="nb" onclick="logout()" style="color:#fca5a5;display:block;font-size:12px">Keluar</button>
@@ -300,7 +300,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
     <p class="hero-sub">Tempat penyimpanan khusus member Tongkrongan Eclipse — simpan video record, foto roleplay, dan momen seru bareng komunitas.</p>
     <div class="hero-cta">
       <button class="btn btn-p" onclick="goTo('register')">🚀 Gabung Sekarang</button>
-      <button class="btn btn-o" onclick="goTo('members')">👥 Lihat Member</button>
+      <button class="btn btn-o" onclick="goTo('members')">🔐 Akun Saya</button>
     </div>
   </div>
 
@@ -392,13 +392,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
 <div class="page" id="page-members">
   <div class="members-wrap">
     <div class="members-header">
-      <p class="eyebrow" style="text-align:center">Komunitas</p>
-      <h1>Member Eclipse Vault</h1>
-      <p>Daftar semua anggota yang sudah bergabung</p>
+      <p class="eyebrow" style="text-align:center">Device Ini</p>
+      <h1>Akun Saya</h1>
+      <p>Akun yang pernah login di perangkat ini</p>
     </div>
     <div class="member-search">
       <span class="member-search-icon">🔍</span>
-      <input type="text" id="memberSearch" placeholder="Cari username member..." oninput="renderMembers()">
+      <input type="text" id="memberSearch" placeholder="Cari username..." oninput="renderMembers()">
+    </div>
+    <!-- Info box -->
+    <div style="background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.2);border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:12px;color:var(--muted);line-height:1.7">
+      🔐 <strong style="color:var(--text)">Hanya kamu yang bisa lihat ini.</strong> Daftar ini menampilkan akun-akun yang pernah dibuat/login di perangkat ini. Klik akun untuk lihat detail & password.
     </div>
     <div class="members-grid" id="membersGrid"></div>
   </div>
@@ -457,7 +461,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
       <button class="sb-item" id="sb-gallery" onclick="showDash('gallery')">🖼️ &nbsp;Galeri Vault</button>
       <button class="sb-item" id="sb-profile" onclick="showDash('profile')">👤 &nbsp;Profil</button>
       <div class="sb-title" style="margin-top:14px">Lainnya</div>
-      <button class="sb-item" onclick="goTo('members')">👥 &nbsp;Member</button>
+      <button class="sb-item" onclick="goTo('members')">🔐 &nbsp;Akun Saya</button>
       <button class="sb-item" onclick="goTo('home')">📖 &nbsp;Tentang Tongkrongan Eclipse</button>
       <button class="sb-item" onclick="logout()" style="color:#fca5a5">🚪 &nbsp;Keluar</button>
     </div>
@@ -510,6 +514,38 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
             <div><div style="font-size:22px;font-weight:900" id="pfPhoto">0</div><div style="font-size:11px;color:var(--muted)">Foto</div></div>
           </div>
         </div>
+        <div class="crd" style="margin-bottom:16px">
+          <h3 style="margin-bottom:14px">🔐 Akun & Keamanan</h3>
+          <div style="background:var(--bg2);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Username</div>
+            <div style="font-size:14px;font-weight:700" id="profUsername">-</div>
+          </div>
+          <div style="background:var(--bg2);border-radius:10px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div style="flex:1">
+              <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Password</div>
+              <div style="font-size:14px;font-weight:700;letter-spacing:2px" id="profPassword">••••••••</div>
+            </div>
+            <button class="ib" onclick="togglePwView()" id="pwViewBtn" title="Lihat password" style="width:36px;height:36px;font-size:15px">👁️</button>
+          </div>
+          <button class="btn btn-o" onclick="openResetPw()" style="padding:9px 18px;font-size:12px;width:100%;justify-content:center">🔄 Ganti Password</button>
+
+          <!-- Reset password inline form -->
+          <div id="resetPwForm" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+            <div class="form-group">
+              <label>Password Lama</label>
+              <div class="pw-wrap"><input type="password" id="oldPwInput" placeholder="Password saat ini"><button class="pw-eye" onclick="togglePw('oldPwInput',this)" type="button">👁️</button></div>
+            </div>
+            <div class="form-group">
+              <label>Password Baru</label>
+              <div class="pw-wrap"><input type="password" id="newPwInput" placeholder="Min. 6 karakter"><button class="pw-eye" onclick="togglePw('newPwInput',this)" type="button">👁️</button></div>
+            </div>
+            <div class="err" id="resetPwErr" style="margin-bottom:10px"></div>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-o" onclick="closeResetPw()" style="flex:1;padding:9px;font-size:12px;justify-content:center">Batal</button>
+              <button class="btn btn-p" onclick="doResetPw()" style="flex:1;padding:9px;font-size:12px;justify-content:center">Simpan</button>
+            </div>
+          </div>
+        </div>
         <div class="crd">
           <h3 style="margin-bottom:10px">🌑 Tentang Eclipse Vault</h3>
           <p style="font-size:12px;color:var(--muted);line-height:1.8">Eclipse Vault adalah tempat penyimpanan khusus untuk member <strong style="color:var(--text)">Tongkrongan Eclipse</strong>. Simpan video record, foto roleplay, dan momen seru bareng komunitas di satu tempat.</p>
@@ -526,7 +562,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
     <button class="mn-item" id="mn-home" onclick="goTo('home')"><span class="mni">🏠</span><span class="mnl">Beranda</span></button>
     <button class="mn-item active" id="mn-upload" onclick="goDash('upload')"><span class="mni">⬆️</span><span class="mnl">Upload</span></button>
     <button class="mn-item" id="mn-gallery" onclick="goDash('gallery')"><span class="mni">🖼️</span><span class="mnl">Galeri</span></button>
-    <button class="mn-item" id="mn-members" onclick="goTo('members')"><span class="mni">👥</span><span class="mnl">Member</span></button>
+    <button class="mn-item" id="mn-members" onclick="goTo('members')"><span class="mni">🔐</span><span class="mnl">Akun</span></button>
     <button class="mn-item" id="mn-profile" onclick="goDash('profile')"><span class="mni">👤</span><span class="mnl">Profil</span></button>
   </div>
 </div>
@@ -611,20 +647,40 @@ function showDash(s){
   if(s==='profile')renderProfile();
 }
 
-// ── MEMBERS LIST ──
+// ── AKUN SAYA ──
 function renderMembers(){
   const q=(document.getElementById('memberSearch')?.value||'').toLowerCase();
   const grid=document.getElementById('membersGrid');
   const filtered=users.filter(u=>u.username.toLowerCase().includes(q));
   if(filtered.length===0){
-    grid.innerHTML='<div class="empty-members" style="grid-column:1/-1"><div class="em-icon">👥</div><h3 style="color:var(--text);margin-bottom:6px">Belum ada member</h3><p>Jadilah member pertama Eclipse Vault!</p></div>';
+    grid.innerHTML='<div class="empty-members" style="grid-column:1/-1"><div class="em-icon">🔐</div><h3 style="color:var(--text);margin-bottom:6px">Belum ada akun</h3><p>Daftar dulu untuk mulai pakai Eclipse Vault!</p></div>';
     return;
   }
-  grid.innerHTML=filtered.map(u=>`<div class="member-card">
-    <div class="member-avatar">${u.username[0].toUpperCase()}</div>
-    <div class="member-name">${u.username}</div>
-    <div class="member-joined">Sejak ${u.joined||'-'}</div>
-  </div>`).join('');
+  grid.innerHTML=filtered.map((u,i)=>`
+    <div class="member-card" style="text-align:left;padding:18px 16px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div class="member-avatar" style="flex-shrink:0">${u.username[0].toUpperCase()}</div>
+        <div>
+          <div class="member-name" style="font-size:14px">@${u.username}</div>
+          <div class="member-joined">Sejak ${u.joined||'-'}</div>
+        </div>
+        ${currentUser&&currentUser.username===u.username?'<span style="font-size:10px;background:rgba(168,85,247,0.15);color:var(--accent);padding:3px 9px;border-radius:100px;font-weight:700;margin-left:auto">Aktif</span>':''}
+      </div>
+      <div style="background:var(--bg2);border-radius:9px;padding:10px 13px;display:flex;align-items:center;justify-content:space-between;gap:8px">
+        <div>
+          <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px">Password</div>
+          <div style="font-size:13px;font-weight:700;letter-spacing:2px" id="pw-${i}">••••••</div>
+        </div>
+        <button class="ib" onclick="toggleAccPw(${i},'${u.pass}')" id="pwbtn-${i}" style="width:32px;height:32px;font-size:14px" title="Lihat password">👁️</button>
+      </div>
+    </div>`).join('');
+}
+
+let accPwVisible={};
+function toggleAccPw(idx,pass){
+  accPwVisible[idx]=!accPwVisible[idx];
+  document.getElementById('pw-'+idx).textContent=accPwVisible[idx]?pass:'••••••';
+  document.getElementById('pwbtn-'+idx).textContent=accPwVisible[idx]?'🙈':'👁️';
 }
 
 // ── UPLOAD ──
@@ -710,6 +766,42 @@ function renderProfile(){
   document.getElementById('pfFiles').textContent=userFiles.length;
   document.getElementById('pfVideo').textContent=userFiles.filter(f=>f.category==='video').length;
   document.getElementById('pfPhoto').textContent=userFiles.filter(f=>f.category==='image').length;
+  document.getElementById('profUsername').textContent='@'+currentUser.username;
+  document.getElementById('profPassword').textContent='••••••••';
+  pwVisible=false;
+  const btn=document.getElementById('pwViewBtn');if(btn)btn.textContent='👁️';
+}
+
+// ── VIEW PASSWORD ──
+let pwVisible=false;
+function togglePwView(){
+  if(!currentUser)return;
+  pwVisible=!pwVisible;
+  document.getElementById('profPassword').textContent=pwVisible?currentUser.pass:'••••••••';
+  document.getElementById('pwViewBtn').textContent=pwVisible?'🙈':'👁️';
+}
+
+// ── RESET PASSWORD ──
+function openResetPw(){
+  document.getElementById('resetPwForm').style.display='block';
+  document.getElementById('oldPwInput').value='';
+  document.getElementById('newPwInput').value='';
+  document.getElementById('resetPwErr').style.display='none';
+}
+function closeResetPw(){document.getElementById('resetPwForm').style.display='none';}
+function doResetPw(){
+  const oldPw=document.getElementById('oldPwInput').value;
+  const newPw=document.getElementById('newPwInput').value;
+  const err=document.getElementById('resetPwErr');err.style.display='none';
+  if(!oldPw||!newPw){err.textContent='Semua field wajib diisi!';err.style.display='block';return;}
+  if(oldPw!==currentUser.pass){err.textContent='Password lama salah!';err.style.display='block';return;}
+  if(newPw.length<6){err.textContent='Password baru minimal 6 karakter!';err.style.display='block';return;}
+  currentUser.pass=newPw;
+  const idx=users.findIndex(u=>u.username===currentUser.username);
+  if(idx>-1)users[idx]=currentUser;
+  saveU();
+  closeResetPw();
+  toast('Password berhasil diganti!');
 }
 
 // Init
