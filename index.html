@@ -205,7 +205,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
 .toast.success{border-color:rgba(16,185,129,.4);color:#6ee7b7;}
 .toast.error{border-color:rgba(239,68,68,.4);color:#fca5a5;}
 
-/* HAMBURGER MENU */
+/* AVATAR PICKER */
+.avatar-picker-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:400;display:none;align-items:center;justify-content:center;padding:20px;}
+.avatar-picker-overlay.show{display:flex;}
+.avatar-picker-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px 24px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto;}
+.avatar-picker-box h3{font-size:17px;font-weight:900;margin-bottom:6px;}
+.avatar-picker-box p{font-size:12px;color:var(--muted);margin-bottom:20px;}
+.avatar-section-title{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;margin-top:16px;}
+.avatar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px;}
+.avatar-opt{width:100%;aspect-ratio:1;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:28px;display:flex;align-items:center;justify-content:center;background:var(--bg2);transition:all .2s;}
+.avatar-opt:hover{border-color:var(--accent);transform:scale(1.1);}
+.avatar-opt.selected{border-color:var(--accent);box-shadow:0 0 0 3px rgba(168,85,247,.3);}
+.avatar-upload-area{border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:16px;}
+.avatar-upload-area:hover{border-color:var(--accent);background:rgba(168,85,247,.05);}
+.avatar-preview{width:80px;height:80px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:36px;background:linear-gradient(135deg,#a855f7,#ec4899);overflow:hidden;}
+.avatar-preview img{width:100%;height:100%;object-fit:cover;}
+.avatar-actions{display:flex;gap:10px;}
+
+/* Update nav-avatar to support image */
+.nav-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
+.member-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
 .ham-btn{width:38px;height:38px;border-radius:9px;border:1px solid var(--border);background:var(--card);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;transition:all .2s;flex-shrink:0;}
 .ham-btn:hover{border-color:var(--accent);}
 .ham-line{width:18px;height:2px;background:var(--text);border-radius:2px;transition:all .3s;}
@@ -278,6 +297,69 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
     <div class="modal-footer">
       <button class="btn btn-o" onclick="closePreview()" style="padding:10px;font-size:13px">Tutup</button>
       <button class="btn btn-p" id="previewDlBtn" style="padding:10px;font-size:13px">⬇️ Download</button>
+    </div>
+  </div>
+</div>
+
+<!-- AVATAR PICKER MODAL -->
+<div class="avatar-picker-overlay" id="avatarPickerOverlay">
+  <div class="avatar-picker-box">
+    <h3>🖼️ Pilih Foto Profil</h3>
+    <p>Pilih avatar bawaan atau upload foto sendiri</p>
+
+    <!-- Preview -->
+    <div style="text-align:center;margin-bottom:16px">
+      <div class="avatar-preview" id="avatarPreview">😺</div>
+      <p style="font-size:11px;color:var(--muted)">Preview avatar kamu</p>
+    </div>
+
+    <!-- Upload sendiri -->
+    <div class="avatar-section-title">📷 Upload Foto Sendiri</div>
+    <div class="avatar-upload-area" onclick="document.getElementById('avatarFileInput').click()">
+      <div style="font-size:24px;margin-bottom:8px">📁</div>
+      <p style="font-size:13px;font-weight:700;margin-bottom:4px">Klik untuk pilih foto</p>
+      <p style="font-size:11px;color:var(--muted)">JPG, PNG · Maks 2MB</p>
+      <input type="file" id="avatarFileInput" accept="image/*" style="display:none" onchange="previewAvatarUpload(this)">
+    </div>
+
+    <!-- Avatar hewan -->
+    <div class="avatar-section-title">🐾 Avatar Hewan</div>
+    <div class="avatar-grid" id="avatarGrid">
+      <div class="avatar-opt selected" onclick="selectAvatar('😺',this)" title="Kucing">😺</div>
+      <div class="avatar-opt" onclick="selectAvatar('🐶',this)" title="Anjing">🐶</div>
+      <div class="avatar-opt" onclick="selectAvatar('🦊',this)" title="Rubah">🦊</div>
+      <div class="avatar-opt" onclick="selectAvatar('🐺',this)" title="Serigala">🐺</div>
+      <div class="avatar-opt" onclick="selectAvatar('🐻',this)" title="Beruang">🐻</div>
+      <div class="avatar-opt" onclick="selectAvatar('🐼',this)" title="Panda">🐼</div>
+      <div class="avatar-opt" onclick="selectAvatar('🐨',this)" title="Koala">🐨</div>
+      <div class="avatar-opt" onclick="selectAvatar('🐯',this)" title="Harimau">🐯</div>
+      <div class="avatar-opt" onclick="selectAvatar('🦁',this)" title="Singa">🦁</div>
+      <div class="avatar-opt" onclick="selectAvatar('🐸',this)" title="Katak">🐸</div>
+      <div class="avatar-opt" onclick="selectAvatar('🐧',this)" title="Penguin">🐧</div>
+      <div class="avatar-opt" onclick="selectAvatar('🦋',this)" title="Kupu-kupu">🦋</div>
+      <div class="avatar-opt" onclick="selectAvatar('🦉',this)" title="Burung Hantu">🦉</div>
+      <div class="avatar-opt" onclick="selectAvatar('🦄',this)" title="Unicorn">🦄</div>
+      <div class="avatar-opt" onclick="selectAvatar('🐉',this)" title="Naga">🐉</div>
+    </div>
+
+    <!-- Avatar lain -->
+    <div class="avatar-section-title">✨ Avatar Lainnya</div>
+    <div class="avatar-grid">
+      <div class="avatar-opt" onclick="selectAvatar('🌙',this)" title="Bulan">🌙</div>
+      <div class="avatar-opt" onclick="selectAvatar('⭐',this)" title="Bintang">⭐</div>
+      <div class="avatar-opt" onclick="selectAvatar('🔥',this)" title="Api">🔥</div>
+      <div class="avatar-opt" onclick="selectAvatar('💜',this)" title="Hati">💜</div>
+      <div class="avatar-opt" onclick="selectAvatar('👾',this)" title="Alien">👾</div>
+      <div class="avatar-opt" onclick="selectAvatar('🎭',this)" title="Topeng">🎭</div>
+      <div class="avatar-opt" onclick="selectAvatar('🎮',this)" title="Gaming">🎮</div>
+      <div class="avatar-opt" onclick="selectAvatar('🎬',this)" title="Film">🎬</div>
+      <div class="avatar-opt" onclick="selectAvatar('⚔️',this)" title="Pedang">⚔️</div>
+      <div class="avatar-opt" onclick="selectAvatar('🏆',this)" title="Trofi">🏆</div>
+    </div>
+
+    <div class="avatar-actions" style="margin-top:20px">
+      <button class="btn btn-o" onclick="closeAvatarPicker()" style="flex:1;padding:11px;font-size:13px;justify-content:center">Batal</button>
+      <button class="btn btn-p" onclick="saveAvatar()" style="flex:1;padding:11px;font-size:13px;justify-content:center">💾 Simpan</button>
     </div>
   </div>
 </div>
@@ -681,7 +763,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
       <div id="dash-profile" style="display:none">
         <div class="dash-header"><h1>Profil Saya</h1><p>Informasi akun Eclipse Vault kamu</p></div>
         <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;margin-bottom:18px">
-          <div class="member-avatar" id="pAvatar" style="width:64px;height:64px;font-size:24px;margin:0 0 14px">E</div>
+          <div class="member-avatar" id="pAvatar" style="width:64px;height:64px;font-size:30px;margin:0 0 6px;cursor:pointer;position:relative" onclick="openAvatarPicker()" title="Klik untuk ganti foto profil">E</div>
+          <div style="font-size:10px;color:var(--accent);margin-bottom:10px;cursor:pointer" onclick="openAvatarPicker()">✏️ Ganti Foto Profil</div>
           <h2 id="pName" style="font-size:20px;font-weight:900">-</h2>
           <p style="color:var(--muted);font-size:12px" id="pJoined">-</p>
           <div style="display:flex;gap:24px;margin-top:16px">
@@ -799,7 +882,8 @@ function loginUser(u){
   currentUser=u;loadData();
   document.getElementById('navLinks').style.display='none';
   document.getElementById('navUser').style.display='flex';
-  document.getElementById('navAvatar').textContent=u.username[0].toUpperCase();
+  const avatar=u.avatar||u.username[0].toUpperCase();
+  updateAvatarUI(avatar);
   document.getElementById('dashGreet').textContent='Hai, '+u.username+'! Kelola vault kamu di sini.';
   document.getElementById('sbUser').textContent='@'+u.username;
   document.getElementById('mobNav').style.display='block';
@@ -936,7 +1020,8 @@ function closePreview(){document.getElementById('previewModal').classList.remove
 // ── PROFILE ──
 function renderProfile(){
   if(!currentUser)return;
-  document.getElementById('pAvatar').textContent=currentUser.username[0].toUpperCase();
+  const avatar=currentUser.avatar||currentUser.username[0].toUpperCase();
+  updateAvatarUI(avatar);
   document.getElementById('pName').textContent='@'+currentUser.username;
   document.getElementById('pJoined').textContent='Bergabung sejak '+(currentUser.joined||'-');
   document.getElementById('pfFiles').textContent=userFiles.length;
@@ -978,6 +1063,87 @@ function doResetPw(){
   saveU();
   closeResetPw();
   toast('Password berhasil diganti!');
+}
+
+// ── AVATAR PICKER ──
+let selectedAvatar='😺';
+let selectedAvatarType='emoji'; // 'emoji' or 'image'
+let selectedAvatarData=null;
+
+function openAvatarPicker(){
+  // Load current avatar
+  if(currentUser){
+    const saved=currentUser.avatar||'😺';
+    if(saved.startsWith('data:')){
+      selectedAvatarType='image';
+      selectedAvatarData=saved;
+      document.getElementById('avatarPreview').innerHTML=`<img src="${saved}">`;
+    } else {
+      selectedAvatar=saved;
+      selectedAvatarType='emoji';
+      document.getElementById('avatarPreview').textContent=saved;
+      // Highlight selected
+      document.querySelectorAll('.avatar-opt').forEach(el=>{
+        el.classList.toggle('selected',el.textContent.trim()===saved);
+      });
+    }
+  }
+  document.getElementById('avatarPickerOverlay').classList.add('show');
+}
+
+function closeAvatarPicker(){
+  document.getElementById('avatarPickerOverlay').classList.remove('show');
+}
+
+function selectAvatar(emoji,el){
+  selectedAvatar=emoji;
+  selectedAvatarType='emoji';
+  selectedAvatarData=null;
+  document.querySelectorAll('.avatar-opt').forEach(e=>e.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('avatarPreview').textContent=emoji;
+  // Clear file input
+  document.getElementById('avatarFileInput').value='';
+}
+
+function previewAvatarUpload(input){
+  const file=input.files[0];
+  if(!file)return;
+  if(file.size>2*1024*1024){toast('Foto terlalu besar! Maks 2MB','error');return;}
+  const reader=new FileReader();
+  reader.onload=e=>{
+    selectedAvatarType='image';
+    selectedAvatarData=e.target.result;
+    document.getElementById('avatarPreview').innerHTML=`<img src="${e.target.result}">`;
+    document.querySelectorAll('.avatar-opt').forEach(el=>el.classList.remove('selected'));
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveAvatar(){
+  if(!currentUser)return;
+  const avatarVal=selectedAvatarType==='image'?selectedAvatarData:selectedAvatar;
+  currentUser.avatar=avatarVal;
+  const idx=users.findIndex(u=>u.username===currentUser.username);
+  if(idx>-1)users[idx]=currentUser;
+  saveU();
+  updateAvatarUI(avatarVal);
+  closeAvatarPicker();
+  toast('Foto profil berhasil diperbarui!');
+}
+
+function updateAvatarUI(avatar){
+  const pAv=document.getElementById('pAvatar');
+  const navAv=document.getElementById('navAvatar');
+  if(avatar&&avatar.startsWith('data:')){
+    pAv.innerHTML=`<img src="${avatar}" style="width:64px;height:64px;border-radius:50%;object-fit:cover"><div style="font-size:10px;color:var(--accent);margin-top:6px;cursor:pointer" onclick="openAvatarPicker()">✏️ Ganti Foto Profil</div>`;
+    navAv.innerHTML=`<img src="${avatar}" style="width:32px;height:32px;border-radius:50%;object-fit:cover">`;
+  } else {
+    pAv.textContent=avatar||currentUser.username[0].toUpperCase();
+    pAv.style.fontSize=avatar&&avatar.length<=2?'30px':'13px';
+    navAv.textContent=avatar&&!avatar.startsWith('data:')?avatar:currentUser.username[0].toUpperCase();
+    navAv.style.fontSize=avatar&&avatar.length<=2?'20px':'13px';
+  }
 }
 
 // ── HAMBURGER MENU ──
