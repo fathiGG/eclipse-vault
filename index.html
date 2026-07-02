@@ -205,6 +205,34 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
 .toast.success{border-color:rgba(16,185,129,.4);color:#6ee7b7;}
 .toast.error{border-color:rgba(239,68,68,.4);color:#fca5a5;}
 
+/* HAMBURGER MENU */
+.ham-btn{width:38px;height:38px;border-radius:9px;border:1px solid var(--border);background:var(--card);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;transition:all .2s;flex-shrink:0;}
+.ham-btn:hover{border-color:var(--accent);}
+.ham-line{width:18px;height:2px;background:var(--text);border-radius:2px;transition:all .3s;}
+.ham-btn.open .ham-line:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.ham-btn.open .ham-line:nth-child(2){opacity:0;}
+.ham-btn.open .ham-line:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.ham-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:180;display:none;backdrop-filter:blur(2px);}
+.ham-overlay.show{display:block;}
+.ham-drawer{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:var(--card);border-left:1px solid var(--border);z-index:190;transition:right .3s ease;overflow-y:auto;}
+.ham-drawer.open{right:0;}
+.ham-drawer-header{padding:20px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.ham-drawer-header .logo{font-size:16px;font-weight:900;background:linear-gradient(135deg,#a855f7,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ham-close{background:none;border:none;cursor:pointer;font-size:20px;color:var(--muted);width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;}
+.ham-close:hover{background:var(--bg2);}
+.ham-section{padding:14px 16px 8px;}
+.ham-section-title{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;padding:0 4px;}
+.ham-item{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:10px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;border:none;background:transparent;width:100%;text-align:left;transition:all .2s;margin-bottom:2px;}
+.ham-item:hover{background:var(--bg2);color:var(--accent);}
+.ham-item .hi-icon{font-size:18px;width:28px;text-align:center;flex-shrink:0;}
+.ham-item .hi-arrow{margin-left:auto;font-size:11px;color:var(--muted);transition:transform .2s;}
+.ham-item.open .hi-arrow{transform:rotate(90deg);}
+.ham-submenu{max-height:0;overflow:hidden;transition:max-height .3s ease;padding-left:16px;}
+.ham-submenu.open{max-height:300px;}
+.ham-sub-item{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;cursor:pointer;font-size:12px;color:var(--muted);font-weight:600;border:none;background:transparent;width:100%;text-align:left;transition:all .2s;margin-bottom:2px;border-left:2px solid var(--border);}
+.ham-sub-item:hover{background:var(--bg2);color:var(--accent);border-left-color:var(--accent);}
+.ham-divider{height:1px;background:var(--border);margin:8px 16px;}
+
 /* RESPONSIVE */
 @media(max-width:768px){
   nav{padding:0 14px;}
@@ -254,6 +282,79 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
   </div>
 </div>
 
+<!-- HAMBURGER OVERLAY -->
+<div class="ham-overlay" id="hamOverlay" onclick="closeHam()"></div>
+
+<!-- HAMBURGER DRAWER -->
+<div class="ham-drawer" id="hamDrawer">
+  <div class="ham-drawer-header">
+    <div class="logo">🌑 Eclipse Vault</div>
+    <button class="ham-close" onclick="closeHam()">✕</button>
+  </div>
+
+  <!-- Komunitas -->
+  <div class="ham-section">
+    <div class="ham-section-title">Komunitas</div>
+    <button class="ham-item" onclick="hamGo('home');scrollToSection('about')">
+      <span class="hi-icon">🌑</span> Tentang Tongkrongan Eclipse
+    </button>
+    <button class="ham-item" onclick="hamGo('home');scrollToSection('rules')">
+      <span class="hi-icon">📋</span> Rules Komunitas
+    </button>
+    <button class="ham-item" onclick="toggleHamSub('sub-events',this)">
+      <span class="hi-icon">🎪</span> Event <span class="hi-arrow">›</span>
+    </button>
+    <div class="ham-submenu" id="sub-events">
+      <button class="ham-sub-item" onclick="hamGo('events')">🎮 Semua Event</button>
+      <button class="ham-sub-item" onclick="hamGo('events');filterEvent('roleplay')">⚔️ Roleplay</button>
+      <button class="ham-sub-item" onclick="hamGo('events');filterEvent('konten')">🎬 Konten Bareng</button>
+    </div>
+  </div>
+
+  <div class="ham-divider"></div>
+
+  <!-- Eclipse Vault -->
+  <div class="ham-section">
+    <div class="ham-section-title">Eclipse Vault</div>
+    <button class="ham-item" onclick="hamGo('home');scrollToSection('vault-info')">
+      <span class="hi-icon">☁️</span> Apa itu Eclipse Vault?
+    </button>
+    <button class="ham-item" onclick="hamGo('members')">
+      <span class="hi-icon">🔐</span> Akun Saya
+    </button>
+    <button class="ham-item" onclick="toggleHamSub('sub-galeri',this)">
+      <span class="hi-icon">🖼️</span> Galeri Event <span class="hi-arrow">›</span>
+    </button>
+    <div class="ham-submenu" id="sub-galeri">
+      <button class="ham-sub-item" onclick="hamGo('galeri-event')">📸 Semua Foto</button>
+      <button class="ham-sub-item" onclick="hamGo('galeri-event');filterGaleri('roleplay')">⚔️ Foto Roleplay</button>
+      <button class="ham-sub-item" onclick="hamGo('galeri-event');filterGaleri('komunitas')">👥 Foto Komunitas</button>
+    </div>
+  </div>
+  <div class="ham-divider"></div>
+  <div class="ham-section">
+    <div class="ham-section-title">Akun</div>
+    <button class="ham-item" id="ham-login-btn" onclick="hamGo('login')">
+      <span class="hi-icon">🔑</span> Masuk
+    </button>
+    <button class="ham-item" id="ham-register-btn" onclick="hamGo('register')">
+      <span class="hi-icon">✨</span> Gabung Sekarang
+    </button>
+    <button class="ham-item" id="ham-dashboard-btn" style="display:none" onclick="hamGo('dashboard')">
+      <span class="hi-icon">☁️</span> Vault Saya
+    </button>
+    <button class="ham-item" id="ham-logout-btn" style="display:none;color:#fca5a5" onclick="logout();closeHam()">
+      <span class="hi-icon">🚪</span> Keluar
+    </button>
+  </div>
+
+  <!-- Discord CTA -->
+  <div style="margin:16px;padding:16px;background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(236,72,153,0.1));border:1px solid var(--border);border-radius:12px;text-align:center;">
+    <p style="font-size:12px;color:var(--muted);margin-bottom:10px">🔥 Belum gabung komunitas?</p>
+    <a href="https://discord.gg/hWNeevXXJ" target="_blank" class="btn btn-p" style="padding:9px 18px;font-size:12px;justify-content:center;width:100%;text-decoration:none">Gabung Tongkrongan Eclipse →</a>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav>
   <div class="nav-logo"><span class="moon">🌑</span> <span>Eclipse Vault</span></div>
@@ -269,6 +370,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
     <div class="nav-avatar" id="navAvatar">E</div>
     <button class="nb" onclick="logout()" style="color:#fca5a5;display:block;font-size:12px">Keluar</button>
   </div>
+  <button class="ham-btn" id="hamBtn" onclick="toggleHam()">
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+  </button>
 </nav>
 
 <!-- ═══ HOME ═══ -->
@@ -408,7 +514,77 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,6,18,0.9)
   </div>
 </div>
 
-<!-- ═══ LOGIN ═══ -->
+<!-- ═══ EVENTS ═══ -->
+<div class="page" id="page-events">
+  <div style="max-width:800px;margin:0 auto;padding:36px 20px 80px">
+    <div style="text-align:center;margin-bottom:32px">
+      <p class="eyebrow" style="text-align:center">Kegiatan</p>
+      <h1 style="font-size:clamp(22px,4vw,34px);font-weight:900;margin-bottom:8px">Event Tongkrongan Eclipse</h1>
+      <p style="color:var(--muted);font-size:13px">Berbagai kegiatan seru yang pernah & akan diadain komunitas</p>
+    </div>
+    <!-- Filter tabs -->
+    <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap" id="eventTabs">
+      <button class="utab active" onclick="filterEvent('all',this)">Semua</button>
+      <button class="utab" onclick="filterEvent('roleplay',this)">⚔️ Roleplay</button>
+      <button class="utab" onclick="filterEvent('konten',this)">🎬 Konten Bareng</button>
+    </div>
+    <div id="eventsList">
+      <!-- RUDAL Roleplay -->
+      <div class="crd event-item" data-cat="roleplay" style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:44px;height:44px;border-radius:12px;background:rgba(168,85,247,0.15);display:flex;align-items:center;justify-content:center;font-size:22px">⚔️</div>
+          <div>
+            <h3 style="font-size:16px;font-weight:800;margin-bottom:2px">RUDAL Roleplay</h3>
+            <span style="font-size:11px;background:rgba(168,85,247,0.15);color:var(--accent);padding:2px 9px;border-radius:100px;font-weight:700">Roleplay</span>
+          </div>
+        </div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:12px">Minecraft Roleplay seru dengan tema perang aliansi, strategi, dan cerita seru bareng komunitas Eclipse.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="font-size:11px;color:var(--muted)">🎙️ Mic nyala</span>
+          <span style="font-size:11px;color:var(--muted)">📺 Upload ke YouTube</span>
+          <span style="font-size:11px;color:var(--muted)">😄 No baper</span>
+        </div>
+      </div>
+      <!-- Placeholder event 2 -->
+      <div class="crd event-item" data-cat="konten" style="margin-bottom:16px;border-style:dashed">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:44px;height:44px;border-radius:12px;background:rgba(236,72,153,0.15);display:flex;align-items:center;justify-content:center;font-size:22px">🎬</div>
+          <div>
+            <h3 style="font-size:16px;font-weight:800;margin-bottom:2px">Konten Bareng</h3>
+            <span style="font-size:11px;background:rgba(236,72,153,0.15);color:var(--accent2);padding:2px 9px;border-radius:100px;font-weight:700">Konten</span>
+          </div>
+        </div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.7">Ngonten bareng member Eclipse — collab video, gaming bareng, atau apapun yang seru!</p>
+        <div style="font-size:11px;color:var(--orange);margin-top:8px">✏️ Detail event segera hadir...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ GALERI EVENT ═══ -->
+<div class="page" id="page-galeri-event">
+  <div style="max-width:900px;margin:0 auto;padding:36px 20px 80px">
+    <div style="text-align:center;margin-bottom:32px">
+      <p class="eyebrow" style="text-align:center">Dokumentasi</p>
+      <h1 style="font-size:clamp(22px,4vw,34px);font-weight:900;margin-bottom:8px">Galeri Event</h1>
+      <p style="color:var(--muted);font-size:13px">Foto & momen seru dari berbagai kegiatan Tongkrongan Eclipse</p>
+    </div>
+    <!-- Filter -->
+    <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap" id="galeriTabs">
+      <button class="utab active" onclick="filterGaleri('all',this)">Semua</button>
+      <button class="utab" onclick="filterGaleri('roleplay',this)">⚔️ Roleplay</button>
+      <button class="utab" onclick="filterGaleri('komunitas',this)">👥 Komunitas</button>
+    </div>
+    <!-- Foto grid -->
+    <div class="doc-photo-grid" id="galeriGrid">
+      <div class="doc-photo-card" data-cat="roleplay"><div class="dp-icon">📷</div><div class="dp-text">Foto Roleplay<br>(segera hadir)</div></div>
+      <div class="doc-photo-card" data-cat="komunitas"><div class="dp-icon">📷</div><div class="dp-text">Foto Komunitas<br>(segera hadir)</div></div>
+      <div class="doc-photo-card" data-cat="roleplay"><div class="dp-icon">📷</div><div class="dp-text">Foto Roleplay<br>(segera hadir)</div></div>
+      <div class="doc-photo-card" data-cat="komunitas"><div class="dp-icon">📷</div><div class="dp-text">Foto Komunitas<br>(segera hadir)</div></div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:24px">📸 Foto dokumentasi akan ditambahkan segera. Stay tuned!</p>
+  </div>
+</div>
 <div class="page" id="page-login">
   <div class="auth-wrap">
     <div class="auth-card">
@@ -802,6 +978,55 @@ function doResetPw(){
   saveU();
   closeResetPw();
   toast('Password berhasil diganti!');
+}
+
+// ── HAMBURGER MENU ──
+function toggleHam(){
+  const btn=document.getElementById('hamBtn');
+  const drawer=document.getElementById('hamDrawer');
+  const overlay=document.getElementById('hamOverlay');
+  btn.classList.toggle('open');
+  drawer.classList.toggle('open');
+  overlay.classList.toggle('show');
+  updateHamAuth();
+}
+function closeHam(){
+  document.getElementById('hamBtn').classList.remove('open');
+  document.getElementById('hamDrawer').classList.remove('open');
+  document.getElementById('hamOverlay').classList.remove('show');
+  document.querySelectorAll('.ham-submenu').forEach(s=>s.classList.remove('open'));
+  document.querySelectorAll('.ham-item').forEach(i=>i.classList.remove('open'));
+}
+function hamGo(page){closeHam();goTo(page);}
+function updateHamAuth(){
+  const li=!!currentUser;
+  document.getElementById('ham-login-btn').style.display=li?'none':'flex';
+  document.getElementById('ham-register-btn').style.display=li?'none':'flex';
+  document.getElementById('ham-dashboard-btn').style.display=li?'flex':'none';
+  document.getElementById('ham-logout-btn').style.display=li?'flex':'none';
+}
+function toggleHamSub(id,btn){
+  const sub=document.getElementById(id);
+  const isOpen=sub.classList.contains('open');
+  document.querySelectorAll('.ham-submenu').forEach(s=>s.classList.remove('open'));
+  document.querySelectorAll('.ham-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen){sub.classList.add('open');if(btn)btn.classList.add('open');}
+}
+function scrollToSection(id){
+  closeHam();
+  setTimeout(()=>{const el=document.getElementById(id);if(el){const y=el.getBoundingClientRect().top+window.scrollY-70;window.scrollTo({top:y,behavior:'smooth'});}},300);
+}
+
+// ── EVENT FILTER ──
+function filterEvent(cat,btn){
+  if(btn){document.querySelectorAll('#eventTabs .utab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');}
+  document.querySelectorAll('.event-item').forEach(el=>{el.style.display=(cat==='all'||el.dataset.cat===cat)?'block':'none';});
+}
+
+// ── GALERI FILTER ──
+function filterGaleri(cat,btn){
+  if(btn){document.querySelectorAll('#galeriTabs .utab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');}
+  document.querySelectorAll('#galeriGrid [data-cat]').forEach(el=>{el.style.display=(cat==='all'||el.dataset.cat===cat)?'flex':'none';});
 }
 
 // Init
